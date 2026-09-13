@@ -4,54 +4,49 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dasshu Data</title>
+<link rel="icon" href="../assets/dasshu-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    color-scheme: light dark;
-    --bg: #0f1115;
-    --card: #171a21;
-    --text: #e8e9ec;
-    --muted: #9aa0ab;
-    --accent: #7aa2f7;
-    --border: #262a33;
-    --pill: #1f2430;
-  }
-  @media (prefers-color-scheme: light) {
-    :root {
-      --bg: #f6f7f9;
-      --card: #ffffff;
-      --text: #1a1c20;
-      --muted: #5b6270;
-      --accent: #3b5bdb;
-      --border: #e3e5e9;
-      --pill: #eef0f4;
-    }
+    --text: #ffffff;
+    --muted: rgba(255, 255, 255, 0.65);
+    --card: rgba(255, 255, 255, 0.06);
+    --border: rgba(255, 255, 255, 0.14);
+    --accent: #e8b4ff;
+    --pill: rgba(255, 255, 255, 0.08);
   }
   * { box-sizing: border-box; }
   body {
     margin: 0;
-    background: var(--bg);
+    background: linear-gradient(118deg, rgb(15, 0, 23) 0%, rgb(28, 14, 14) 100%);
+    background-attachment: fixed;
     color: var(--text);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     padding: 40px 16px 64px;
   }
   main {
     max-width: 900px;
     margin: 0 auto;
   }
-  h1 { font-size: 1.75rem; margin: 0 0 4px; }
-  p.lead { color: var(--muted); margin: 0 0 32px; }
+  h1 { font-size: 1.9rem; font-weight: 600; letter-spacing: 0.02em; margin: 0 0 4px; }
+  p.lead { color: var(--muted); margin: 0 0 32px; font-weight: 300; }
   a { color: var(--accent); text-decoration: none; }
   a:hover { text-decoration: underline; }
   section {
     background: var(--card);
     border: 1px solid var(--border);
-    border-radius: 12px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-radius: 18px;
     padding: 20px 24px;
     margin-bottom: 20px;
   }
   section h2 {
     margin: 0 0 4px;
     font-size: 1.1rem;
+    font-weight: 500;
     display: flex;
     align-items: center;
     gap: 8px;

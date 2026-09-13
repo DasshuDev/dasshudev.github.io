@@ -3,66 +3,100 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dasshu</title>
+<title>DasshuDev Homepage</title>
+<link rel="icon" href="assets/dasshu-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    color-scheme: light dark;
-    --bg: #110f15;
-    --card: #171a21;
-    --text: #ece8ec;
-    --muted: #a69aab;
-    --accent: #da9bff;
-    --border: #2d2633;
-  }
-  @media (prefers-color-scheme: light) {
-    :root {
-      --bg: #f9f6f8;
-      --card: #ffffff;
-      --text: #1a1c20;
-      --muted: #705b67;
-      --accent: #e89cff;
-      --border: #e3e5e9;
-    }
+    --white: #ffffff;
+    --muted: rgba(255, 255, 255, 0.65);
+    --card-bg: rgba(255, 255, 255, 0.06);
+    --card-border: rgba(255, 255, 255, 0.14);
+    --accent: #e8b4ff;
   }
   * { box-sizing: border-box; }
-  body {
+  html, body {
     margin: 0;
-    background: var(--bg);
-    color: var(--text);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    padding: 0;
+    min-height: 100vh;
+  }
+  body {
+    background: linear-gradient(118deg, rgb(15, 0, 23) 0%, rgb(28, 14, 14) 100%);
+    background-attachment: fixed;
+    color: var(--white);
+    font-family: "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     display: flex;
     justify-content: center;
-    padding: 48px 16px;
+    padding: 64px 20px;
   }
   main {
     width: 100%;
     max-width: 640px;
   }
+  .kicker {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+  .kicker img {
+    width: 52px;
+    height: 52px;
+    transform: rotate(13deg);
+    border-radius: 12px;
+  }
+  .kicker span {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
   h1 {
-    font-size: 2rem;
-    margin: 0 0 8px;
+    font-size: 2.4rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    margin: 0 0 10px;
+    background: linear-gradient(90deg, #ffffff 0%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
   p.lead {
     color: var(--muted);
-    margin: 0 0 32px;
-    line-height: 1.5;
+    margin: 0 0 36px;
+    line-height: 1.6;
+    font-weight: 300;
+    font-size: 1.02rem;
   }
   .card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px 24px;
-    margin-bottom: 16px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-radius: 18px;
+    padding: 22px 26px;
+    margin-bottom: 18px;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+  .card:hover {
+    border-color: rgba(255, 255, 255, 0.28);
+    transform: translateY(-1px);
   }
   .card h2 {
     margin: 0 0 8px;
     font-size: 1.05rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
   }
   .card p {
     margin: 0 0 12px;
     color: var(--muted);
-    line-height: 1.5;
+    line-height: 1.6;
     font-size: 0.95rem;
+    font-weight: 300;
   }
   a {
     color: var(--accent);
@@ -70,20 +104,26 @@
   }
   a:hover { text-decoration: underline; }
   code {
-    background: rgba(127, 127, 127, 0.15);
+    background: rgba(255, 255, 255, 0.1);
     padding: 2px 6px;
     border-radius: 4px;
     font-size: 0.85em;
   }
   footer {
-    margin-top: 32px;
-    color: var(--muted);
-    font-size: 0.85rem;
+    margin-top: 40px;
+    color: rgba(255, 255, 255, 0.35);
+    font-size: 0.8rem;
+    letter-spacing: 0.03em;
   }
 </style>
 </head>
 <body>
 <main>
+  <div class="kicker">
+    <img src="assets/dasshu-icon.png" alt="Dasshu">
+    <span>Dasshu</span>
+  </div>
+
   <h1>The DasshuDev Homepage</h1>
   <p class="lead">Welcome! This page hosts static data for the <strong>Better Gauntlets</strong> Geode mod.</p>
 
