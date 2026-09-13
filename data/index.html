@@ -97,10 +97,18 @@
     gap: 14px;
   }
   .icon-tile {
+    display: block;
     background: var(--pill);
     border-radius: 8px;
     padding: 10px;
     text-align: center;
+    cursor: pointer;
+    transition: background 0.15s ease, transform 0.15s ease;
+  }
+  .icon-tile:hover {
+    background: rgba(255, 255, 255, 0.16);
+    transform: translateY(-2px);
+    text-decoration: none;
   }
   .icon-tile img {
     max-width: 100%;
@@ -234,8 +242,12 @@
       const grid = document.createElement('div');
       grid.className = 'icon-grid';
       for (const file of files) {
-        const tile = document.createElement('div');
+        const tile = document.createElement('a');
         tile.className = 'icon-tile';
+        tile.href = 'icons/' + file.name;
+        tile.target = '_blank';
+        tile.rel = 'noopener';
+        tile.title = 'Open ' + file.name;
         const img = document.createElement('img');
         img.src = 'icons/' + file.name;
         img.alt = file.name;
