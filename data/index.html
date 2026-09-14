@@ -98,17 +98,20 @@
   }
   .icon-tile {
     display: block;
+    width: 100%;
     background: var(--pill);
+    border: none;
     border-radius: 8px;
     padding: 10px;
     text-align: center;
     cursor: pointer;
+    font-family: inherit;
+    color: inherit;
     transition: background 0.15s ease, transform 0.15s ease;
   }
   .icon-tile:hover {
     background: rgba(255, 255, 255, 0.16);
     transform: translateY(-2px);
-    text-decoration: none;
   }
   .icon-tile img {
     max-width: 100%;
@@ -127,6 +130,57 @@
     color: var(--muted);
     font-size: 0.8rem;
     margin-top: 8px;
+  }
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(7, 3, 10, 0.82);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    z-index: 1000;
+  }
+  .lightbox-content {
+    position: relative;
+    max-width: min(90vw, 480px);
+    max-height: 90vh;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 28px;
+    text-align: center;
+  }
+  .lightbox-content img {
+    display: block;
+    margin: 0 auto 14px;
+    max-width: 100%;
+    max-height: 60vh;
+    image-rendering: pixelated;
+  }
+  .lightbox-caption {
+    font-size: 0.85rem;
+    color: var(--muted);
+    word-break: break-all;
+  }
+  .lightbox-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 50%;
+    background: var(--pill);
+    color: var(--text);
+    font-size: 1.1rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+  .lightbox-close:hover {
+    background: rgba(255, 255, 255, 0.2);
   }
 </style>
 </head>
@@ -167,6 +221,14 @@
 
   <footer>Served via GitHub Pages / jsDelivr for the Better Gauntlets mod.</footer>
 </main>
+
+<div class="lightbox" id="lightbox" hidden>
+  <div class="lightbox-content">
+    <button type="button" class="lightbox-close" id="lightbox-close" aria-label="Close">&times;</button>
+    <img id="lightbox-img" src="" alt="">
+    <div class="lightbox-caption" id="lightbox-caption"></div>
+  </div>
+</div>
 
 <script>
   const IMAGE_EXT = /\.(png|jpe?g|gif|webp|svg)$/i;
@@ -242,12 +304,10 @@
       const grid = document.createElement('div');
       grid.className = 'icon-grid';
       for (const file of files) {
-        const tile = document.createElement('a');
+        const tile = document.createElement('button');
+        tile.type = 'button';
         tile.className = 'icon-tile';
-        tile.href = 'icons/' + file.name;
-        tile.target = '_blank';
-        tile.rel = 'noopener';
-        tile.title = 'Open ' + file.name;
+        tile.title = 'View ' + file.name;
         const img = document.createElement('img');
         img.src = 'icons/' + file.name;
         img.alt = file.name;
@@ -256,6 +316,7 @@
         span.textContent = file.name;
         tile.appendChild(img);
         tile.appendChild(span);
+        tile.addEventListener('click', () => openLightbox('icons/' + file.name, file.name));
         grid.appendChild(tile);
       }
       el.replaceWith(grid);
@@ -265,6 +326,30 @@
       renderError(el, 'Could not list icons (' + err.message + ')');
     }
   }
+
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxCaption = document.getElementById('lightbox-caption');
+
+  function openLightbox(src, caption) {
+    lightboxImg.src = src;
+    lightboxImg.alt = caption;
+    lightboxCaption.textContent = caption;
+    lightbox.hidden = false;
+  }
+
+  function closeLightbox() {
+    lightbox.hidden = true;
+    lightboxImg.src = '';
+  }
+
+  document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !lightbox.hidden) closeLightbox();
+  });
 
   renderIcons();
   renderList('gauntlets', 'gauntlets');
